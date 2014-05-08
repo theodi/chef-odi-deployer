@@ -8,3 +8,6 @@ cookbook 'odi-rvm', github: 'theodi/odi-chef', rel: "site-cookbooks/odi-rvm"
 cookbook 'rvm', github: 'theodi/chef-rvm'
 cookbook 'envbuilder', github: 'theodi/chef-envbuilder'
 cookbook 'odi-nginx', github: 'theodi/odi-chef', rel: "site-cookbooks/odi-nginx"
+
+# for test-kitchen
+cookbook 'mysql'

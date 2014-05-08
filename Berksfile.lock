@@ -2,6 +2,7 @@ DEPENDENCIES
   envbuilder
     git: git://github.com/theodi/chef-envbuilder.git
     revision: 27252c8b85be41067ce364d62f9779855c5108b0
+  mysql
   odi-deployment
     path: .
     metadata: true
@@ -38,6 +39,7 @@ GRAPH
     windows (>= 0.0.0)
     yum (~> 3.0)
     yum-epel (>= 0.0.0)
+  mysql (5.2.6)
   nginx (1.8.0)
     apt (>= 0.0.0)
     build-essential (>= 0.0.0)
