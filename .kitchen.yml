@@ -28,9 +28,9 @@ suites:
         owner: "env"
         group: "env"
       project_fqdn: "deploytest.theodi.org"
-      git_project: "deployment-test-app"
+      git_project: "office-calendar"
       RACK_ENV: "production"
       databags:
         primary: "deploytest"
       deployment:
-        revision: "1-9-3"
+        revision: "travisify"
