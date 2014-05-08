@@ -35,3 +35,29 @@ suites:
         primary: "office-calendar"
       deployment:
         revision: "d0a1e758c1e38edf00572c6907475eacae73f470"
+  - name: deployment-new-foreman
+    run_list:
+    - "recipe[odi-users]"
+    - "recipe[odi-rvm]"
+    - "recipe[envbuilder]"
+    - "recipe[mysql::client]"
+    - "recipe[odi-nginx]"
+    - "recipe[odi-deployment]"
+    data_bags_path: test/data_bags
+    attributes:
+      user: "deploytest"
+      rvm:
+        user: "deploytest"
+        ruby: "1.9.3"
+      envbuilder:
+        base_dir: "/home/deploytest"
+        base_dbi: "production"
+        owner: "deploytest"
+        group: "deploytest"
+      project_fqdn: "office-calendar.theodi.org"
+      git_project: "office-calendar"
+      RACK_ENV: "production"
+      databags:
+        primary: "office-calendar"
+      deployment:
+        revision: "3924ba12d02811387ba917bef0140c70b00aa030"
