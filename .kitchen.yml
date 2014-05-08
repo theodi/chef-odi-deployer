@@ -24,10 +24,10 @@ suites:
         user: "deploytest"
         ruby: "1.9.3"
       envbuilder:
-        base_dir: "/home/env"
+        base_dir: "/home/deploytest"
         base_dbi: "production"
-        owner: "env"
-        group: "env"
+        owner: "deploytest"
+        group: "deploytest"
       project_fqdn: "office-calendar.theodi.org"
       git_project: "office-calendar"
       RACK_ENV: "production"
