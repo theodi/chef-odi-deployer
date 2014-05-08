@@ -33,7 +33,8 @@ describe service("office-calendar-thin-1") do
   it { should be_running }
 end
 
-# Check we can actually access the thing
+# Check we can actually access the thing - we'll get a Rails error due
+# to lack of database, but that's OK as we know Rails is running.
 describe command("curl -H 'Host: office-calendar.theodi.org' localhost") do
-  it { should return_stdout /Hello, world!/ }
+  it { should return_stdout /We\'re sorry, but something went wrong \(500\)/ }
 end
