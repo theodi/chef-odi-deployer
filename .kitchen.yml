@@ -30,5 +30,7 @@ suites:
       project_fqdn: "deploytest.theodi.org"
       git_project: "deployment-test-app"
       RACK_ENV: "production"
-      deploy:
+      databags:
+        primary: "deploytest"
+      deployment:
         revision: "master"
