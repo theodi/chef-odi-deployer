@@ -34,4 +34,4 @@ suites:
       databags:
         primary: "office-calendar"
       deployment:
-        revision: "travisify"
+        revision: "d0a1e758c1e38edf00572c6907475eacae73f470"
