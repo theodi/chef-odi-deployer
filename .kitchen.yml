@@ -21,7 +21,7 @@ suites:
       user: "deploytest"
       rvm:
         user: "deploytest"
-        ruby: "2.1.1"
+        ruby: "1.9.3"
       envbuilder:
         base_dir: "/home/env"
         base_dbi: "production"
@@ -33,4 +33,4 @@ suites:
       databags:
         primary: "deploytest"
       deployment:
-        revision: "master"
+        revision: "1-9-3"
