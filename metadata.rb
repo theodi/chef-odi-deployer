@@ -1,4 +1,4 @@
-name             'ODI-deployment'
+name             'odi-deployment'
 maintainer       'The Open Data Institute'
 maintainer_email 'tech@theodi.org'
 license          'MIT'
