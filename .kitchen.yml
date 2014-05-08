@@ -1,0 +1,34 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: ubuntu-14.04
+
+suites:
+  - name: deployment-old-foreman
+    run_list:
+    - "recipe[odi-users]"
+    - "recipe[odi-rvm]"
+    - "recipe[envbuilder]"
+    - "recipe[odi-nginx]"
+    - "recipe[odi-deployment]"
+    data_bags_path: test/data_bags
+    attributes:
+      user: "deploytest"
+      rvm:
+        user: "deploytest"
+        ruby: "2.1.1"
+      envbuilder:
+        base_dir: "/home/env"
+        base_dbi: "production"
+        owner: "env"
+        group: "env"
+      project_fqdn: "deploytest.theodi.org"
+      git_project: "deployment-test-app"
+      RACK_ENV: "production"
+      deploy:
+        revision: "master"
