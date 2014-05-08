@@ -6,10 +6,10 @@ describe service("nginx") do
 end
 
 # Make sure vhosts have the correct stuff
-describe file("/etc/nginx/sites-enabled/deploytest.theodi.org") do
+describe file("/etc/nginx/sites-enabled/office-calendar.theodi.org") do
   it { should be_file }
-  its(:content) { should match "server_name deploytest.theodi.org;" }
-  its(:content) { should match "proxy_pass http://deployment-test-app;" }
+  its(:content) { should match "server_name office-calendar.theodi.org;" }
+  its(:content) { should match "proxy_pass http://office-calendar;" }
 end
 
 # Make sure we have some code
@@ -29,7 +29,7 @@ describe file("/etc/init/deployment-test-app-web-1.conf") do
 end
 
 # Make sure foreman job is running
-describe service("deployment-test-app-web-1") do
+describe service("office-calendar-web-1") do
   it { should be_running }
 end
 

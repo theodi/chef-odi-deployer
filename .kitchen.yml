@@ -28,10 +28,10 @@ suites:
         base_dbi: "production"
         owner: "env"
         group: "env"
-      project_fqdn: "deploytest.theodi.org"
+      project_fqdn: "office-calendar.theodi.org"
       git_project: "office-calendar"
       RACK_ENV: "production"
       databags:
-        primary: "deploytest"
+        primary: "office-calendar"
       deployment:
         revision: "travisify"
