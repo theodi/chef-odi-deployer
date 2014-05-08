@@ -1,5 +1,6 @@
 {
-  "id": "databases",
-  "content" : {
+  "host": "localhost",
+  "root": {
+    "_default": ""
   }
 }
