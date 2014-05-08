@@ -188,6 +188,7 @@ deploy_revision root_dir do
       source "vhost.erb"
       variables(
           :servername         => node[:git_project],
+          :domain             => node[:deployment][:domain],
           :listen_port        => node[:deployment][:nginx_port],
           :port               => node[:deployment][:port],
           :non_odi_hostname   => node[:non_odi_hostname],
