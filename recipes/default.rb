@@ -24,6 +24,8 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
+include_recipe 'git'
+
 class Chef::Recipe
   include ODI::Deployment::Helpers
 end
@@ -106,10 +108,11 @@ deploy_revision root_dir do
             :mysql_password => mysql_password
         }
     }.each_pair do |name, params|
-      template '%s/config/%s' % [
+      template "%s/config/%s" % [
           shared_directory,
           name
       ] do
+
         source "%s.erb" % [
             name
         ]
@@ -185,6 +188,7 @@ deploy_revision root_dir do
       source "vhost.erb"
       variables(
           :servername         => node[:git_project],
+          :domain             => node[:deployment][:domain],
           :listen_port        => node[:deployment][:nginx_port],
           :port               => node[:deployment][:port],
           :non_odi_hostname   => node[:non_odi_hostname],
@@ -212,4 +216,3 @@ deploy_revision root_dir do
   action :deploy
 
 end
-
