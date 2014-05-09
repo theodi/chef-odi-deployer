@@ -22,7 +22,7 @@ suites:
       user: "deploytest"
       rvm:
         user: "deploytest"
-        ruby: "1.9.3"
+        ruby: "1.9.3-p545"
       envbuilder:
         base_dir: "/home/deploytest"
         base_dbi: "production"
@@ -48,7 +48,7 @@ suites:
       user: "deploytest"
       rvm:
         user: "deploytest"
-        ruby: "1.9.3"
+        ruby: "1.9.3-p545"
       envbuilder:
         base_dir: "/home/deploytest"
         base_dbi: "production"
