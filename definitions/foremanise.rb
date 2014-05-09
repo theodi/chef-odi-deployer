@@ -16,7 +16,7 @@ define :foremanise, :params => {} do
     user params[:user]
     code <<-EOF
       RUBY="#{node[:rvm][:user_installs].select { |h| h[:user] == user }[0][:default_ruby]}"
-      echo "PATH=/home/#{user}/.rvm/gems/ruby-${RUBY}@global/bin:/home/#{user}/.rvm/rubies/ruby-${RUBY}/bin" >> /tmp/path_env
+      echo "PATH=/home/#{user}/.rvm/gems/ruby-${RUBY}@global/bin:/home/#{user}/.rvm/rubies/ruby-${RUBY}/bin" > /tmp/path_env
     EOF
   end
 
