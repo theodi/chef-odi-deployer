@@ -56,8 +56,7 @@ suites:
         group: "deploytest"
       project_fqdn: "office-calendar.theodi.org"
       git_project: "office-calendar"
-      RACK_ENV: "production"
       databags:
         primary: "office-calendar"
       deployment:
-        revision: "3924ba12d02811387ba917bef0140c70b00aa030"
+        revision: "a8c6137279fc6d7c98c6d1b898633441e2c41ef8"
