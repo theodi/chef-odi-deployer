@@ -187,14 +187,15 @@ deploy_revision root_dir do
     ] do
       source "vhost.erb"
       variables(
-          :servername         => node[:git_project],
-          :domain             => node[:deployment][:domain],
-          :listen_port        => node[:deployment][:nginx_port],
-          :port               => node[:deployment][:port],
-          :non_odi_hostname   => node[:non_odi_hostname],
-          :catch_and_redirect => node[:catch_and_redirect],
-          :default            => node[:deployment][:default_vhost],
-          :static_assets      => node[:deployment][:static_assets]
+          :servername          => node[:git_project],
+          :domain              => node[:deployment][:domain],
+          :listen_port         => node[:deployment][:nginx_port],
+          :port                => node[:deployment][:port],
+          :non_odi_hostname    => node[:non_odi_hostname],
+          :catch_and_redirect  => node[:catch_and_redirect],
+          :default             => node[:deployment][:default_vhost],
+          :static_assets       => node[:deployment][:static_assets],
+          :assets_allow_origin => node[:deployment][:assets_allow_origin]
       )
       action :create
     end
