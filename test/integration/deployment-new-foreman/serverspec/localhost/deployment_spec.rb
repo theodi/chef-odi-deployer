@@ -12,6 +12,14 @@ describe file("/etc/nginx/sites-enabled/office-calendar.theodi.org") do
   its(:content) { should match "proxy_pass http://office-calendar;" }
 end
 
+# Make sure vhosts have correct static asset configuration
+# cross-origin is disabled in this suite
+describe file("/etc/nginx/sites-enabled/office-calendar.theodi.org") do
+  it { should be_file }
+  its(:content) { should match /location \~ \^\/\(assets\)\// }
+  its(:content) { should_not match /add_header Access-Control-Allow-Origin "\*";/ }
+end
+
 # Make sure we have some code
 describe file("/var/www/office-calendar.theodi.org/current/config.ru") do
   it { should be_file }

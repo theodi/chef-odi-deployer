@@ -35,6 +35,7 @@ suites:
         primary: "office-calendar"
       deployment:
         revision: "d0a1e758c1e38edf00572c6907475eacae73f470"
+        assets_allow_origin: "*"
   - name: deployment-new-foreman
     run_list:
     - "recipe[odi-users]"
