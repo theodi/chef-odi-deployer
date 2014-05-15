@@ -46,7 +46,7 @@ GRAPH
     ohai (>= 1.1.4)
     runit (>= 0.0.0)
     yum (>= 0.0.0)
-  odi-deployment (0.3.6)
+  odi-deployment (0.4.0)
     git (>= 0.0.0)
     nginx (>= 0.0.0)
   odi-nginx (0.4.0)
