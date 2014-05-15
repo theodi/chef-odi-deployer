@@ -214,6 +214,6 @@ deploy_revision root_dir do
   ]
   notifies :restart, "service[nginx]"
 
-  action :force_deploy
+  action :deploy
 
 end
