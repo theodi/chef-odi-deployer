@@ -1,0 +1,11 @@
+require 'spec_helper'
+
+# Make sure nginx is running
+describe service("nginx") do
+ it { should be_running }
+end
+
+# # Make sure foreman job is running
+# describe service("office-calendar-thin-1") do
+#  it { should be_running }
+# end

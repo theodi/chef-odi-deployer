@@ -4,6 +4,8 @@ driver:
 
 provisioner:
   name: chef_zero
+  client_rb:
+    environment: production
 
 platforms:
   - name: ubuntu-14.04
@@ -39,24 +41,30 @@ suites:
     run_list:
     - "recipe[odi-users]"
     - "recipe[odi-rvm]"
+    - "recipe[lib-curl]"
+    - "recipe[nodejs::install_from_package]"
     - "recipe[envbuilder]"
     - "recipe[mysql::client]"
     - "recipe[odi-nginx]"
     - "recipe[odi-deployment]"
     data_bags_path: test/data_bags
     attributes:
-      user: "deploytest"
+      user: "certificate"
       rvm:
-        user: "deploytest"
+        user: "certificate"
         ruby: "1.9.3-p545"
       envbuilder:
-        base_dir: "/home/deploytest"
+        base_dir: "/home/certificate"
         base_dbi: "production"
-        owner: "deploytest"
-        group: "deploytest"
-      project_fqdn: "office-calendar.theodi.org"
-      git_project: "office-calendar"
+        owner: "certificate"
+        group: "certificate"
+      project_fqdn: "certificates.theodi.org"
+      git_project: "open-data-certificate"
       databags:
-        primary: "office-calendar"
+        primary: "certificates"
       deployment:
-        revision: "a8c6137279fc6d7c98c6d1b898633441e2c41ef8"
+        revision: "CURRENT"
+        precompile_assets: false
+      database: certificates
+      memcached: true
+      RACK_ENV: production

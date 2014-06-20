@@ -15,6 +15,9 @@ module ODI
               node[:project],
               node.chef_environment
           ]
+          f = File.open "/tmp/wtf", "w"
+          f.write search_string
+          f.close
           box           = search(:node, search_string)[0]
           box_ip        = box['ipaddress']
           if box['rackspace']

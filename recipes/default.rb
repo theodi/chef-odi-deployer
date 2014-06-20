@@ -57,6 +57,12 @@ if node[:database]
   end
 end
 
+#mysql_ip = 'rackspaceclouddb'
+
+if node[:memcached]
+  memcached_ip = find_a 'memcached'
+end
+
 precompile_assets = node[:deployment][:precompile_assets].nil? ? true : node[:deployment][:precompile_assets]
 port              = node[:deployment][:port]
 root_dir          = "%s/%s" % [
@@ -176,6 +182,22 @@ deploy_revision root_dir do
     current_release_directory = release_path
     running_deploy_user       = new_resource.user
 
+    e = "%s/.env.%s" % [
+      current_release_directory,
+      node[:RACK_ENV]
+    ]
+
+    f = File.open e, "a"
+
+    if memcached_ip
+      f.write "MEMCACHED_HOSTS: "
+      f.write memcached_ip
+      f.write "\n"
+    end
+
+    f.close
+    FileUtils.chown running_deploy_user, running_deploy_user, e
+
     foremanise node[:git_project] do
       cwd current_release_directory
       user running_deploy_user
@@ -213,6 +235,6 @@ deploy_revision root_dir do
   ]
   notifies :restart, "service[nginx]"
 
-  action :deploy
+  action :force_deploy
 
 end

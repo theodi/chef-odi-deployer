@@ -1,0 +1,9 @@
+{
+  "host": "somethingsomething.rackspaceclouddb.com",
+  "root": {
+    "_default": ""
+  },
+  "certificates": {
+    "production": "how_to_security"
+  }
+}
