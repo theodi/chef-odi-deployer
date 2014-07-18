@@ -4,11 +4,12 @@ metadata
 
 cookbook 'odi-users', github: 'theodi/odi-chef', rel: "site-cookbooks/odi-users"
 cookbook 'odi-xml', github: 'theodi/odi-chef', rel: "site-cookbooks/odi-xml"
-cookbook 'odi-rvm', github: 'theodi/odi-chef', rel: "site-cookbooks/odi-rvm"
-cookbook 'rvm', github: 'theodi/chef-rvm'
 cookbook 'envbuilder', github: 'theodi/chef-envbuilder'
 cookbook 'odi-nginx', github: 'theodi/odi-chef', rel: "site-cookbooks/odi-nginx"
 cookbook 'lib-curl', github: 'theodi/chef-libcurl'
+cookbook 'odi-ruby', github: 'theodi/chef-odi-ruby'
+cookbook 'odi-apt', github: 'theodi/odi-chef', rel: 'site-cookbooks/odi-apt'
+cookbook 'rbenv', github: 'fnichol/chef-rbenv'
 
 # for test-kitchen
 cookbook 'mysql'

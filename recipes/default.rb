@@ -25,6 +25,7 @@
 #
 
 include_recipe 'git'
+include_recipe 'odi-ruby'
 
 class Chef::Recipe
   include ODI::Deployment::Helpers
@@ -146,35 +147,11 @@ deploy_revision root_dir do
       EOF
     end
 
-    script 'Bundling' do
-      interpreter 'bash'
-      cwd current_release_directory
-      user running_deploy_user
-      code <<-EOF
-        RUBY="#{node[:rvm][:user_installs].select { |h| h[:user] == running_deploy_user }[0][:default_ruby]}"
-        BINPATH="/home/#{running_deploy_user}/.rvm/rubies/ruby-${RUBY}/bin/"
-        ${BINPATH}gem update bundler
-        PATH=${BINPATH}:${PATH}
+#    bundlify current_release_directory do
+#      user running_deploy_user
+#      depot bundler_depot
+#    end
 
-        bundle install \
-          --without=development test \
-          --path #{bundler_depot}
-      EOF
-    end
-
-    script 'Precompiling assets' do
-      interpreter 'bash'
-      cwd current_release_directory
-      user running_deploy_user
-      code <<-EOF
-        RUBY="#{node[:rvm][:user_installs].select { |h| h[:user] == running_deploy_user }[0][:default_ruby]}"
-        BINPATH="/home/#{running_deploy_user}/.rvm/rubies/ruby-${RUBY}/bin/"
-        PATH=${BINPATH}:${PATH}
-
-        RACK_ENV=#{node[:deployment][:rack_env]} RAILS_ENV=#{node[:deployment][:rack_env]} bundle exec rake assets:precompile
-      EOF
-      only_if { precompile_assets }
-    end
   end
 
   before_restart do
@@ -198,35 +175,16 @@ deploy_revision root_dir do
     f.close
     FileUtils.chown running_deploy_user, running_deploy_user, e
 
-    foremanise node[:git_project] do
+#    foremanise node[:git_project] do
+#      cwd current_release_directory
+#      user running_deploy_user
+#      root_dir root_dir
+#      port port
+#    end
+
+    make_vhosts node[:git_project] do
       cwd current_release_directory
       user running_deploy_user
-      port port
-    end
-
-    template "%s/vhost" % [
-        current_release_directory
-    ] do
-      source "vhost.erb"
-      variables(
-          :servername         => node[:git_project],
-          :domain             => node[:deployment][:domain],
-          :listen_port        => node[:deployment][:nginx_port],
-          :port               => node[:deployment][:port],
-          :non_odi_hostname   => node[:non_odi_hostname],
-          :catch_and_redirect => node[:catch_and_redirect],
-          :default            => node[:deployment][:default_vhost],
-          :static_assets      => node[:deployment][:static_assets]
-      )
-      action :create
-    end
-
-    link "/etc/nginx/sites-enabled/%s" % [
-        node[:project_fqdn]
-    ] do
-      to "%s/vhost" % [
-          current_release_directory
-      ]
     end
   end
 

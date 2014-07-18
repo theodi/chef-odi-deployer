@@ -39,8 +39,8 @@ suites:
         revision: "d0a1e758c1e38edf00572c6907475eacae73f470"
   - name: deployment-new-foreman
     run_list:
+    - "recipe[odi-apt]"
     - "recipe[odi-users]"
-    - "recipe[odi-rvm]"
     - "recipe[lib-curl]"
     - "recipe[nodejs::install_from_package]"
     - "recipe[envbuilder]"
@@ -50,9 +50,10 @@ suites:
     data_bags_path: test/data_bags
     attributes:
       user: "certificate"
-      rvm:
-        user: "certificate"
-        ruby: "1.9.3-p545"
+      odi-ruby:
+        users:
+          certificate:
+          - 1.9.3-p547
       envbuilder:
         base_dir: "/home/certificate"
         base_dbi: "production"
@@ -63,8 +64,10 @@ suites:
       databags:
         primary: "certificates"
       deployment:
-        revision: "CURRENT"
+        revision: "testicicle"
         precompile_assets: false
       database: certificates
       memcached: true
       RACK_ENV: production
+      force_ssl: false
+      catch_and_redirect: certificate.theodi.org
