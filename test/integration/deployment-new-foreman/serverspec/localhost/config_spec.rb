@@ -18,8 +18,8 @@ describe file("/var/www/certificates.theodi.org/current/database.yml") do
   its(:content) { should match /password: how_to_security/ }
 end
 
-### describe file("/etc/init/office-calendar-thin-1.conf") do
-###   its(:content) { should match /SUCH='test'/ }
-###   its(:content) { should match /PORT=3000/ }
-###   its(:content) { should match /bundle exec thin start/ }
-### end
+describe file("/etc/init/open-data-certificate-thin-1.conf") do
+  its(:content) { should match /SUCH=test/ }
+  its(:content) { should match /PORT=3000/ }
+  its(:content) { should match /bundle exec thin start/ }
+end

@@ -17,6 +17,6 @@ end
 
 describe file("/etc/nginx/sites-enabled/certificates.theodi.org") do
   it { should contain("listen 80;").after('certificate.theodi.org') }
-###   its(:content) { should match "server_name certificate.theodi.org;" }
-###   its(:content) { should match "rewrite ^/(.*)$ https://certificates.theodi.org/$1 permanent;" }
+  it { should contain("server_name certificate.theodi.org;").after('certificate.theodi.org') }
+  it { should contain("rewrite ^/(.*)$ http://certificates.theodi.org/$1 permanent;").after('certificate.theodi.org') }
 end

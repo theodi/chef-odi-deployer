@@ -32,6 +32,6 @@ server {
 server {
   server_name <%= @catch_and_redirect %>;
   listen <%= @listen_port %>;
-  rewrite ^/(.*) http://<%= @project_fqdn %>/$1 permanent;
+  rewrite ^/(.*)$ http://<%= @project_fqdn %>/$1 permanent;
 }
 <% end %>

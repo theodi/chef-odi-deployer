@@ -147,10 +147,10 @@ deploy_revision root_dir do
       EOF
     end
 
-#    bundlify current_release_directory do
-#      user running_deploy_user
-#      depot bundler_depot
-#    end
+    bundlify current_release_directory do
+      user running_deploy_user
+      depot bundler_depot
+    end
 
   end
 
@@ -175,12 +175,12 @@ deploy_revision root_dir do
     f.close
     FileUtils.chown running_deploy_user, running_deploy_user, e
 
-#    foremanise node[:git_project] do
-#      cwd current_release_directory
-#      user running_deploy_user
-#      root_dir root_dir
-#      port port
-#    end
+    foremanise node[:git_project] do
+      cwd current_release_directory
+      user running_deploy_user
+      root_dir root_dir
+      port port
+    end
 
     make_vhosts node[:git_project] do
       cwd current_release_directory
