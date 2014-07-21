@@ -4,6 +4,9 @@
     "such": "test",
     "session_secret_calendar": "uphuroW6eemaighei1Aefoh5Veegho9pheeGhidi2opheikah7mie3unahghaepa",
     "rack_env": "production",
-    "rails_env": "production"
+    "rails_env": "production",
+    "session_secret": {
+      "certificate": "how_to_derping"
+    }
   }
 }
