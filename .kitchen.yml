@@ -67,6 +67,7 @@ suites:
       deployment:
         revision: "testicicle"
         precompile_assets: false
+        rack_env: production
       database: certificate
       memcached: true
       RACK_ENV: production
@@ -76,3 +77,4 @@ suites:
         database: certificate
         user: certificate
         password: how_to_security
+      migrate: rake db:migrate
