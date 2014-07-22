@@ -3,5 +3,5 @@
   "chef_environment": "production",
   "automatic": {
     "ipaddress": "99.99.99.99"
-    }
+  }
 }
