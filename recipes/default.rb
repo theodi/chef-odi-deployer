@@ -44,8 +44,6 @@ domain      = get_domain
   end
 end
 
-#has_db = node[:has_db].nil? ? true : node[:has_db]
-
 mysql_ip = nil
 dbi      = nil
 dbi      = data_bag_item node['databags']['primary'], 'databases'
@@ -57,8 +55,6 @@ if node[:database]
     mysql_ip = find_a 'mysql'
   end
 end
-
-#mysql_ip = 'rackspaceclouddb'
 
 if node[:memcached]
   memcached_ip = find_a 'memcached'
