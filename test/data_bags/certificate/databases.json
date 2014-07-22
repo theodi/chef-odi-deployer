@@ -1,9 +1,9 @@
 {
-  "host": "somethingsomething.rackspaceclouddb.com",
+  "host": "localhost",
   "root": {
     "_default": ""
   },
-  "certificates": {
+  "certificate": {
     "production": "how_to_security"
   }
 }

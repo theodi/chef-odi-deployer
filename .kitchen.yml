@@ -39,6 +39,7 @@ suites:
         revision: "d0a1e758c1e38edf00572c6907475eacae73f470"
   - name: deployment-new-foreman
     run_list:
+    - "recipe[rackspace-mysql-proxy]"
     - "recipe[odi-apt]"
     - "recipe[odi-users]"
     - "recipe[lib-curl]"
@@ -62,12 +63,16 @@ suites:
       project_fqdn: "certificates.theodi.org"
       git_project: "open-data-certificate"
       databags:
-        primary: "certificates"
+        primary: "certificate"
       deployment:
         revision: "testicicle"
         precompile_assets: false
-      database: certificates
+      database: certificate
       memcached: true
       RACK_ENV: production
       force_ssl: false
       catch_and_redirect: certificate.theodi.org
+      rackspace-mysql-proxy:
+        database: certificate
+        user: certificate
+        password: how_to_security
