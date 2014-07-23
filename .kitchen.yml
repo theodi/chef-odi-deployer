@@ -39,13 +39,13 @@ suites:
         revision: "d0a1e758c1e38edf00572c6907475eacae73f470"
   - name: deployment-new-foreman
     run_list:
-    - "recipe[rackspace-mysql-proxy]"
     - "recipe[odi-apt]"
     - "recipe[odi-users]"
     - "recipe[lib-curl]"
     - "recipe[nodejs::install_from_package]"
     - "recipe[envbuilder]"
     - "recipe[mysql::client]"
+    - "recipe[rackspace-mysql-proxy]"
     - "recipe[odi-nginx]"
     - "recipe[odi-deployment]"
     data_bags_path: test/data_bags
@@ -70,7 +70,7 @@ suites:
         rack_env: production
       database: certificate
       memcached: true
-      RACK_ENV: production
+      rack_env: production
       force_ssl: false
       catch_and_redirect: certificate.theodi.org
       rackspace-mysql-proxy:
