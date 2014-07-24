@@ -6,7 +6,7 @@
     "rack_env": "production",
     "rails_env": "production",
     "session_secret": {
-      "certificate": "how_to_derping"
+      "certificate": "8184842351530937c9c8c2e723fd03f4"
     }
   }
 }
