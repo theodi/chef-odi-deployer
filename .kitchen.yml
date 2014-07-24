@@ -45,36 +45,39 @@ suites:
     - "recipe[nodejs::install_from_package]"
     - "recipe[envbuilder]"
     - "recipe[mysql::client]"
+    - "recipe[memcached]"
     - "recipe[rackspace-mysql-proxy]"
     - "recipe[odi-nginx]"
     - "recipe[odi-deployment]"
     data_bags_path: test/data_bags
     attributes:
-      user: "certificate"
+      user: "certificates"
       odi-ruby:
         users:
-          certificate:
+          certificates:
           - 1.9.3-p547
       envbuilder:
-        base_dir: "/home/certificate"
+        base_dir: "/home/certificates"
         base_dbi: "production"
-        owner: "certificate"
-        group: "certificate"
+        owner: "certificates"
+        group: "certificates"
       project_fqdn: "certificates.theodi.org"
       git_project: "open-data-certificate"
       databags:
-        primary: "certificate"
+        primary: "certificates"
       deployment:
         revision: "testicicle"
         precompile_assets: false
         rack_env: production
-      database: certificate
-      memcached: true
+      database: certificates
+      requires_memcached: true
       rack_env: production
       force_ssl: false
       catch_and_redirect: certificate.theodi.org
       rackspace-mysql-proxy:
-        database: certificate
-        user: certificate
+        database: certificates
+        user: certificates
         password: how_to_security
       migrate: rake db:migrate
+      post_deploy_tasks:
+      - rake odc:deploy
