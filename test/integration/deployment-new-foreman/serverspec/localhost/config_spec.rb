@@ -13,8 +13,8 @@ end
 
 describe file("/var/www/certificates.theodi.org/current/database.yml") do
   its(:content) { should match /host: localhost/ }
-  its(:content) { should match /database: certificate/ }
-  its(:content) { should match /username: certificate/ }
+  its(:content) { should match /database: certificates/ }
+  its(:content) { should match /username: certificates/ }
   its(:content) { should match /password: how_to_security/ }
 end
 
