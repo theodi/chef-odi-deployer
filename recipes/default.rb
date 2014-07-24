@@ -56,7 +56,7 @@ if node[:database]
   end
 end
 
-if node[:memcached]
+if node[:requires_memcached]
   memcached_ip = find_a 'memcached'
 end
 
