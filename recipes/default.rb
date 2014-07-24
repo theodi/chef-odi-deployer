@@ -148,6 +148,12 @@ deploy_revision root_dir do
       depot bundler_depot
     end
 
+    precompile_assets "WTF" do
+      user running_deploy_user
+      cwd current_release_directory
+
+      only_if node[:precompile_assets]
+    end
   end
 
   before_restart do
