@@ -19,4 +19,6 @@ describe command("curl -H 'Host: certificates.theodi.org' localhost") do
   it { should return_stdout /ODI Open Data Certificate/ }
 end
 
-#describe something "it should run the post-deploy tasks"
+describe file('/var/www/certificates.theodi.org/shared/log/production.log') do
+  it { should contain ('Creating scope :with_includes. Overwriting existing method SurveySection.with_includes.') }
+end
