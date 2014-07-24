@@ -16,7 +16,7 @@ end
 # Check we can actually access the thing - we'll get a Rails error due
 # to lack of database, but that's OK as we know Rails is running.
 describe command("curl -H 'Host: certificates.theodi.org' localhost") do
-  it { should return_stdout /Error - ODI Open Data Certificate/ }
+  it { should return_stdout /ODI Open Data Certificate/ }
 end
 
 #describe something "it should run the post-deploy tasks"
