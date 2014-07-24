@@ -10,3 +10,4 @@ depends "nginx"
 depends "git"
 depends "nodejs"
 depends 'odi-ruby'
+depends 'envbuilder'
