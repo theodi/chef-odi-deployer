@@ -82,8 +82,8 @@ deploy_revision root_dir do
 
   keep_releases 10
   rollback_on_error false
-  migrate           = node.has_key? :migrate
-  migration_command = node[:migrate]
+  migrate           node.has_key? :migrate
+  migration_command node[:migrate]
 
   revision node[:deployment][:revision]
 
