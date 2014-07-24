@@ -157,7 +157,7 @@ deploy_revision root_dir do
 
     e = "%s/.env.%s" % [
       current_release_directory,
-      node[:RACK_ENV]
+      node[:deployment][:rack_env]
     ]
 
     f = File.open e, "a"

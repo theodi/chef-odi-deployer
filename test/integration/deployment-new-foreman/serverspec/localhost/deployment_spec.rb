@@ -14,3 +14,5 @@ end
 describe command("curl -H 'Host: certificates.theodi.org' localhost") do
   it { should return_stdout /Error - ODI Open Data Certificate/ }
 end
+
+#describe something "it should run the post-deploy tasks"
