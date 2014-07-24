@@ -14,3 +14,4 @@ cookbook 'rbenv', github: 'fnichol/chef-rbenv'
 
 # for test-kitchen
 cookbook 'mysql'
+cookbook 'memcached'

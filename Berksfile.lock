@@ -5,6 +5,7 @@ DEPENDENCIES
   lib-curl
     git: git://github.com/theodi/chef-libcurl.git
     revision: 3473e7424f1eaa673766c9d09fa0135733ece81d
+  memcached
   mysql
   odi-apt
     git: git://github.com/theodi/odi-chef.git
@@ -58,6 +59,10 @@ GRAPH
     yum-epel (>= 0.0.0)
   java (1.22.0)
   lib-curl (0.1.0)
+  memcached (1.7.2)
+    runit (~> 1.0)
+    yum (~> 3.0)
+    yum-epel (>= 0.0.0)
   mysql (5.2.6)
   mysql-chef_gem (0.0.2)
     build-essential (>= 0.0.0)
