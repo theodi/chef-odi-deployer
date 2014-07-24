@@ -3,7 +3,7 @@
   "root": {
     "_default": ""
   },
-  "certificate": {
+  "certificates": {
     "production": "how_to_security"
   }
 }
