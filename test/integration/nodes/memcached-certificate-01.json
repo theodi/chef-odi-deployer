@@ -2,6 +2,6 @@
   "id": "memcached-certificate-01",
   "chef_environment": "production",
   "automatic": {
-    "ipaddress": "99.99.99.99"
+    "ipaddress": "127.0.0.1"
   }
 }
