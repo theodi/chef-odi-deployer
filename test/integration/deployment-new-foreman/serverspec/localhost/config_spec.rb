@@ -7,8 +7,8 @@ end
 
 describe file("/var/www/certificates.theodi.org/current/.env.production") do
   it { should be_file }
-  it { should be_owned_by 'certificate' }
-  its(:content) { should match "MEMCACHED_HOSTS: 99.99.99.99"}
+  it { should be_owned_by 'certificates' }
+  its(:content) { should match "MEMCACHED_HOSTS: 127.0.0.1"}
 end
 
 describe file("/var/www/certificates.theodi.org/current/database.yml") do
