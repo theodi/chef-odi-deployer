@@ -5,7 +5,11 @@ describe file("/var/www/certificates.theodi.org/current/config.ru") do
  it { should be_file }
 end
 
-describe command ('mysql -h localhost -u root -pilikerandompasswords certificate -e "show tables"') do
+describe file("/var/www/certificates.theodi.org/current/public/assets/") do
+  it { should be_directory }
+end
+
+describe command ('mysql -h localhost -u root -pilikerandompasswords certificates -e "show tables"') do
   it { should return_stdout /surveys/i }
 end
 
