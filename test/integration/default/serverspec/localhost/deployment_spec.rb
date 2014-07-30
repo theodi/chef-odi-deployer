@@ -24,9 +24,8 @@ describe file('/var/www/certificates.theodi.org/shared/log/production.log') do
 end
 
 # Make sure vhosts have correct static asset configuration
-# cross-origin is disabled in this suite
 describe file("/etc/nginx/sites-enabled/certificates.theodi.org") do
   it { should be_file }
   its(:content) { should match /location \~ \^\/\(assets\)\// }
-  its(:content) { should_not match /add_header Access-Control-Allow-Origin "\*";/ }
+  its(:content) { should match /add_header Access-Control-Allow-Origin "\*";/ }
 end

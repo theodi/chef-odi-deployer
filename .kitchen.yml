@@ -43,6 +43,7 @@ suites:
         revision: "testicicle"
         precompile_assets: false
         rack_env: production
+        assets_allow_origin: "*"
       database: certificates
       requires_memcached: true
       rack_env: production
