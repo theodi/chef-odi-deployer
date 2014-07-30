@@ -22,3 +22,11 @@ end
 describe file('/var/www/certificates.theodi.org/shared/log/production.log') do
   it { should contain ('Creating scope :with_includes. Overwriting existing method SurveySection.with_includes.') }
 end
+
+# Make sure vhosts have correct static asset configuration
+# cross-origin is disabled in this suite
+describe file("/etc/nginx/sites-enabled/certificates.theodi.org") do
+  it { should be_file }
+  its(:content) { should match /location \~ \^\/\(assets\)\// }
+  its(:content) { should_not match /add_header Access-Control-Allow-Origin "\*";/ }
+end
