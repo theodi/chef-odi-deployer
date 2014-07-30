@@ -1,6 +1,6 @@
 define :make_vhosts, :params => {} do
   suffix = nil
-  suffix = '.ssl' if node[:force_ssl]
+  suffix = '.ssl' if node['force_ssl']
 
   vhosts_dir = "%s/vhosts" % [
     params[:cwd]
@@ -8,7 +8,7 @@ define :make_vhosts, :params => {} do
 
   vh = "%s/%s%s" % [
       vhosts_dir,
-      node[:project_fqdn],
+      node['project_fqdn'],
       suffix
   ]
 
@@ -20,15 +20,14 @@ define :make_vhosts, :params => {} do
   template vh do
     source "vhost.erb"
     variables(
-        :servername         => node[:git_project],
-        :domain             => node[:deployment][:domain],
-        :listen_port        => node[:deployment][:nginx_port],
-        :port               => node[:deployment][:port],
-        :project_fqdn       => node[:project_fqdn],
-        :non_odi_hostname   => node[:non_odi_hostname],
-        :catch_and_redirect => node[:catch_and_redirect],
-        :default            => node[:deployment][:default_vhost],
-        :static_assets      => node[:deployment][:static_assets]
+        :servername         => node['git_project'],
+        :listen_port        => node['deployment']['nginx_port'],
+        :port               => node['deployment']['port'],
+        :project_fqdn       => node['project_fqdn'],
+        :catch_and_redirect => node['catch_and_redirect'],
+        :default            => node['deployment']['default_vhost'],
+        :static_assets      => node['deployment']['static_assets'],
+        :assets_allow_origin => node['deployment']['assets_allow_origin']
     )
     action :create
   end

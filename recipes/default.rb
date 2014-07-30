@@ -31,7 +31,7 @@ class Chef::Recipe
   include ODI::Deployment::Helpers
 end
 
-deploy_root = node[:deployment][:root]
+deploy_root = node['deployment']['root']
 domain      = get_domain
 
 [
@@ -48,7 +48,7 @@ mysql_ip = nil
 dbi      = nil
 dbi      = data_bag_item node['databags']['primary'], 'databases'
 
-if node[:database]
+if node['database']
   if dbi['host']
     mysql_ip = dbi['host']
   else
@@ -56,25 +56,25 @@ if node[:database]
   end
 end
 
-if node[:requires_memcached]
+if node['requires_memcached']
   memcached_ip = find_a 'memcached'
 end
 
-precompile_assets = node[:deployment][:precompile_assets].nil? ? true : node[:deployment][:precompile_assets]
-port              = node[:deployment][:port]
+precompile_assets = node['deployment']['precompile_assets'].nil? ? true : node['deployment']['precompile_assets']
+port              = node['deployment']['port']
 root_dir          = "%s/%s" % [
     deploy_root,
-    node[:project_fqdn]
+    node['project_fqdn']
 ]
 
 make_shared_dirs root_dir
 
 deploy_revision root_dir do
-  user node[:user]
-  group node[:user]
+  user node['user']
+  group node['user']
 
   environment(
-      "RACK_ENV" => node[:deployment][:rack_env],
+      "RACK_ENV" => node['deployment']['rack_env'],
       "HOME"     => "/home/%s" % [
           user
       ]
@@ -83,12 +83,12 @@ deploy_revision root_dir do
   keep_releases 10
   rollback_on_error false
   migrate           node.has_key? :migrate
-  migration_command node[:migrate]
+  migration_command node['migrate']
 
-  revision node[:deployment][:revision]
+  revision node['deployment']['revision']
 
   repo "git://github.com/theodi/%s.git" % [
-      node[:git_project]
+      node['git_project']
   ]
 
   before_migrate do
@@ -98,7 +98,7 @@ deploy_revision root_dir do
     bundler_depot             = new_resource.shared_path + '/bundle'
 
     begin
-      mysql_password = dbi[node[:database]][node.chef_environment]
+      mysql_password = dbi[node['database']][node.chef_environment]
     rescue
       mysql_password = 'ThisPasswordIntentionallyLeftBlank'
     end
@@ -106,8 +106,8 @@ deploy_revision root_dir do
     {
         'database.yml' => {
             :mysql_host     => mysql_ip,
-            :mysql_database => node[:database],
-            :mysql_username => node[:database],
+            :mysql_database => node['database'],
+            :mysql_username => node['database'],
             :mysql_password => mysql_password
         }
     }.each_pair do |name, params|
@@ -152,7 +152,7 @@ deploy_revision root_dir do
       user running_deploy_user
       cwd current_release_directory
 
-      only_if node[:precompile_assets]
+      only_if node['precompile_assets']
     end
   end
 
@@ -163,7 +163,7 @@ deploy_revision root_dir do
 
     e = "%s/.env.%s" % [
       current_release_directory,
-      node[:deployment][:rack_env]
+      node['deployment']['rack_env']
     ]
 
     f = File.open e, "a"
@@ -177,21 +177,21 @@ deploy_revision root_dir do
     f.close
     FileUtils.chown running_deploy_user, running_deploy_user, e
 
-    foremanise node[:git_project] do
+    foremanise node['git_project'] do
       cwd current_release_directory
       user running_deploy_user
       root_dir root_dir
       port port
     end
 
-    make_vhosts node[:git_project] do
+    make_vhosts node['git_project'] do
       cwd current_release_directory
       user running_deploy_user
     end
   end
 
   restart_command "sudo service %s restart" % [
-      node[:git_project]
+      node['git_project']
   ]
   notifies :restart, "service[nginx]"
 
@@ -199,7 +199,7 @@ deploy_revision root_dir do
     running_deploy_user       = new_resource.user
     current_release_directory = release_path
 
-    post_deploy_tasks node[:post_deploy_tasks] do
+    post_deploy_tasks node['post_deploy_tasks'] do
       cwd current_release_directory
       user running_deploy_user
     end
