@@ -16,13 +16,13 @@ suites:
     - "recipe[odi-apt]"
     - "recipe[odi-users]"
     - "recipe[lib-curl]"
-    - "recipe[nodejs::install_from_package]"
+    - "recipe[nodejs]"
     - "recipe[envbuilder]"
     - "recipe[mysql::client]"
     - "recipe[memcached]"
     - "recipe[rackspace-mysql-proxy]"
     - "recipe[odi-nginx]"
-    - "recipe[odi-deployment]"
+    - "recipe[odi-deployer]"
     data_bags_path: test/data_bags
     attributes:
       user: "certificates"
