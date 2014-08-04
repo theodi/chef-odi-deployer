@@ -6,7 +6,7 @@ driver:
   rackspace_region: lon
   require_chef_omnibus: latest
   wait_for: 1200
-  server_name: chef-odi-ruby-test
+  server_name: chef-odi-deployer-test
 
 provisioner:
   name: chef_zero
