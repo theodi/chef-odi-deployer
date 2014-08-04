@@ -7,7 +7,7 @@ define :precompile_assets, :params => {} do
     cwd cwd
     user user
     code <<-EOF
-      rake assets:precompile
+      bundle exec rake assets:precompile
     EOF
   end
 end

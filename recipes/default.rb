@@ -148,7 +148,7 @@ deploy_revision root_dir do
       depot bundler_depot
     end
 
-    precompile_assets "WTF" do
+    precompile_assets "Precompile assets" do
       user running_deploy_user
       cwd current_release_directory
 
@@ -205,6 +205,6 @@ deploy_revision root_dir do
     end
   end
 
-  action :force_deploy
+  action :deploy
 
 end
