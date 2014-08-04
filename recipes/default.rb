@@ -25,12 +25,13 @@
 #
 
 include_recipe 'git'
+include_recipe 'odi-ruby'
 
 class Chef::Recipe
   include ODI::Deployment::Helpers
 end
 
-deploy_root = node[:deployment][:root]
+deploy_root = node['deployment']['root']
 domain      = get_domain
 
 [
@@ -43,13 +44,11 @@ domain      = get_domain
   end
 end
 
-#has_db = node[:has_db].nil? ? true : node[:has_db]
-
 mysql_ip = nil
 dbi      = nil
 dbi      = data_bag_item node['databags']['primary'], 'databases'
 
-if node[:database]
+if node['database']
   if dbi['host']
     mysql_ip = dbi['host']
   else
@@ -57,21 +56,25 @@ if node[:database]
   end
 end
 
-precompile_assets = node[:deployment][:precompile_assets].nil? ? true : node[:deployment][:precompile_assets]
-port              = node[:deployment][:port]
+if node['requires_memcached']
+  memcached_ip = find_a 'memcached'
+end
+
+precompile_assets = node['deployment']['precompile_assets'].nil? ? true : node['deployment']['precompile_assets']
+port              = node['deployment']['port']
 root_dir          = "%s/%s" % [
     deploy_root,
-    node[:project_fqdn]
+    node['project_fqdn']
 ]
 
 make_shared_dirs root_dir
 
 deploy_revision root_dir do
-  user node[:user]
-  group node[:user]
+  user node['user']
+  group node['user']
 
   environment(
-      "RACK_ENV" => node[:deployment][:rack_env],
+      "RACK_ENV" => node['deployment']['rack_env'],
       "HOME"     => "/home/%s" % [
           user
       ]
@@ -79,13 +82,13 @@ deploy_revision root_dir do
 
   keep_releases 10
   rollback_on_error false
-  migrate           = node.has_key? :migrate
-  migration_command = node[:migrate]
+  migrate           node.has_key? :migrate
+  migration_command node['migrate']
 
-  revision node[:deployment][:revision]
+  revision node['deployment']['revision']
 
   repo "git://github.com/theodi/%s.git" % [
-      node[:git_project]
+      node['git_project']
   ]
 
   before_migrate do
@@ -95,7 +98,7 @@ deploy_revision root_dir do
     bundler_depot             = new_resource.shared_path + '/bundle'
 
     begin
-      mysql_password = dbi[node[:database]][node.chef_environment]
+      mysql_password = dbi[node['database']][node.chef_environment]
     rescue
       mysql_password = 'ThisPasswordIntentionallyLeftBlank'
     end
@@ -103,8 +106,8 @@ deploy_revision root_dir do
     {
         'database.yml' => {
             :mysql_host     => mysql_ip,
-            :mysql_database => node[:database],
-            :mysql_username => node[:database],
+            :mysql_database => node['database'],
+            :mysql_username => node['database'],
             :mysql_password => mysql_password
         }
     }.each_pair do |name, params|
@@ -140,34 +143,16 @@ deploy_revision root_dir do
       EOF
     end
 
-    script 'Bundling' do
-      interpreter 'bash'
-      cwd current_release_directory
+    bundlify current_release_directory do
       user running_deploy_user
-      code <<-EOF
-        RUBY="#{node[:rvm][:user_installs].select { |h| h[:user] == running_deploy_user }[0][:default_ruby]}"
-        BINPATH="/home/#{running_deploy_user}/.rvm/rubies/ruby-${RUBY}/bin/"
-        ${BINPATH}gem update bundler
-        PATH=${BINPATH}:${PATH}
-
-        bundle install \
-          --without=development test \
-          --path #{bundler_depot}
-      EOF
+      depot bundler_depot
     end
 
-    script 'Precompiling assets' do
-      interpreter 'bash'
-      cwd current_release_directory
+    precompile_assets "Precompile assets" do
       user running_deploy_user
-      code <<-EOF
-        RUBY="#{node[:rvm][:user_installs].select { |h| h[:user] == running_deploy_user }[0][:default_ruby]}"
-        BINPATH="/home/#{running_deploy_user}/.rvm/rubies/ruby-${RUBY}/bin/"
-        PATH=${BINPATH}:${PATH}
+      cwd current_release_directory
 
-        RACK_ENV=#{node[:deployment][:rack_env]} RAILS_ENV=#{node[:deployment][:rack_env]} bundle exec rake assets:precompile
-      EOF
-      only_if { precompile_assets }
+      only_if node['precompile_assets']
     end
   end
 
@@ -176,43 +161,49 @@ deploy_revision root_dir do
     current_release_directory = release_path
     running_deploy_user       = new_resource.user
 
-    foremanise node[:git_project] do
+    e = "%s/.env.%s" % [
+      current_release_directory,
+      node['deployment']['rack_env']
+    ]
+
+    f = File.open e, "a"
+
+    if memcached_ip
+      f.write "MEMCACHED_HOSTS: "
+      f.write memcached_ip
+      f.write "\n"
+    end
+
+    f.close
+    FileUtils.chown running_deploy_user, running_deploy_user, e
+
+    foremanise node['git_project'] do
       cwd current_release_directory
       user running_deploy_user
+      root_dir root_dir
       port port
     end
 
-    template "%s/vhost" % [
-        current_release_directory
-    ] do
-      source "vhost.erb"
-      variables(
-          :servername          => node[:git_project],
-          :domain              => node[:deployment][:domain],
-          :listen_port         => node[:deployment][:nginx_port],
-          :port                => node[:deployment][:port],
-          :non_odi_hostname    => node[:non_odi_hostname],
-          :catch_and_redirect  => node[:catch_and_redirect],
-          :default             => node[:deployment][:default_vhost],
-          :static_assets       => node[:deployment][:static_assets],
-          :assets_allow_origin => node[:deployment][:assets_allow_origin]
-      )
-      action :create
-    end
-
-    link "/etc/nginx/sites-enabled/%s" % [
-        node[:project_fqdn]
-    ] do
-      to "%s/vhost" % [
-          current_release_directory
-      ]
+    make_vhosts node['git_project'] do
+      cwd current_release_directory
+      user running_deploy_user
     end
   end
 
   restart_command "sudo service %s restart" % [
-      node[:git_project]
+      node['git_project']
   ]
   notifies :restart, "service[nginx]"
+
+  after_restart do
+    running_deploy_user       = new_resource.user
+    current_release_directory = release_path
+
+    post_deploy_tasks node['post_deploy_tasks'] do
+      cwd current_release_directory
+      user running_deploy_user
+    end
+  end
 
   action :deploy
 

@@ -1,0 +1,19 @@
+language: ruby
+rvm:
+- 2.1.2
+script:
+- travis_wait 60 bundle exec rake
+before_script:
+- ssh-keygen -f ~/.ssh/id_rsa -t rsa -N ''
+after_success:
+- openssl enc -d -aes-256-cbc -k $CHEF_KEY -in deploy/key.enc -out deploy/key.pem
+- chmod 600 deploy/key.pem
+- bundle exec berks install
+- '[ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] && bundle
+  exec rake berkshelf:upload'
+env:
+  global:
+  - KITCHEN_YAML=.kitchen.cloud.yml
+  - secure: vMT3M7ecfj1r3YFAd+EVyuae0AXQ4QHXoXWrT5o19/3+AAydYKv7R586r1VSVWblHZdjEOq2c2TNM8W0MFnJllNVudCHeR15WsFReIof2jRAFGOkwTVaixdXnhKPCqAs2wqSuYFzhv4L2Tfph/X6jOCQV0IsNE7l/eieJT13Cao=
+  - secure: 05jEOV44mwz8Fg4x1ih0fxAQg3UMB4fz1jK6tp/cwsrW2dv7ARYjvv74sLOWLxfRv/Ft/KZUt2igbEQ1BuogOk7qzwbH/ChBX6iE3WY+I0v3oxMzeAJsfsMc93PMIRi+ZKR7X5v44Tp5CqMqQBk2LXDqMCXnvsdkDuppyKdMux8=
+  - secure: AnXN5Ro3is9OVHKikhbSd5g1/px4Ads0EXeCPAuTcNbOWfgDRVT2EGICPWRarugPwPP+cC2hTt8UI9FSwIOtqVDVHt9b7gSYVAHGuFH61YoG5f+leexTi2nVATDJ1bzRkkKkut6g2x+bGjpUH+PX/Um9pbKaeCD6XA2yqZOgHdc=

@@ -5,7 +5,7 @@ task :foodcritic do
   Rake::Task[:prepare_sandbox].execute
 
   if Gem::Version.new("1.9.2") <= Gem::Version.new(RUBY_VERSION.dup)
-    sh "foodcritic -f any #{sandbox_path}"
+    sh "foodcritic --tags ~FC015 -f any #{sandbox_path}"
   else
     puts "WARN: foodcritic run is skipped as Ruby #{RUBY_VERSION} is < 1.9.2."
   end
@@ -35,7 +35,7 @@ namespace :kitchen do
 
   desc "Run test-kitchen tests"
   task :test do
-    sh "kitchen test"
+    sh "kitchen test --destroy=always"
   end
 
 end

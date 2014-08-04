@@ -1,5 +1,4 @@
 /.kitchen/
-
 /.bundle/
-
 /deploy/key.pem
+tmp

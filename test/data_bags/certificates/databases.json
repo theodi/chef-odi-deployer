@@ -1,0 +1,9 @@
+{
+  "host": "localhost",
+  "root": {
+    "_default": ""
+  },
+  "certificates": {
+    "production": "how_to_security"
+  }
+}

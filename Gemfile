@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "2.1.0"
+ruby "2.1.2"
 #ruby-gemset=chef-odi-deployment
 
 gem "test-kitchen"
@@ -10,5 +10,5 @@ gem 'serverspec'
 gem 'berkshelf', github: 'berkshelf/berkshelf'
 gem 'rake'
 gem 'foodcritic'
-gem 'chef'
+gem 'chef', '~> 11.12.4'
 gem 'badgerbadgerbadger'
