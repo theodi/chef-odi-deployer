@@ -59,6 +59,6 @@ suites:
         database: certificates
         user: certificates
         password: how_to_security
-      migrate: rake db:migrate
+      migrate: bundle exec rake db:migrate
       post_deploy_tasks:
-      - rake odc:deploy
+      - bundle exec rake odc:deploy
