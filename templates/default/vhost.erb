@@ -4,10 +4,10 @@ upstream <%= @servername %> {
 
 server {
   listen <%= @listen_port %><%= if @default then " default" end %>;
-  server_name <%= @project_fqdn %>;
-  access_log /var/log/nginx/<%= @project_fqdn %>.log;
-  error_log /var/log/nginx/<%= @project_fqdn %>.err;
-  root /var/www/<%= @project_fqdn %>/current/public/;
+  server_name <%= @fqdn %>;
+  access_log /var/log/nginx/<%= @fqdn %>.log;
+  error_log /var/log/nginx/<%= @fqdn %>.err;
+  root /var/www/<%= @fqdn %>/current/public/;
 
   location / {
     try_files $uri @backend;
@@ -35,6 +35,6 @@ server {
 server {
   server_name <%= @catch_and_redirect %>;
   listen <%= @listen_port %>;
-  rewrite ^/(.*)$ http://<%= @project_fqdn %>/$1 permanent;
+  rewrite ^/(.*)$ http://<%= @fqdn %>/$1 permanent;
 }
 <% end %>

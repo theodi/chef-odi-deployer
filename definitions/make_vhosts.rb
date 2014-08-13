@@ -1,15 +1,11 @@
 define :make_vhosts, :params => {} do
-  suffix = nil
-  suffix = '.ssl' if node['force_ssl']
-
   vhosts_dir = "%s/vhosts" % [
     params[:cwd]
   ]
 
-  vh = "%s/%s%s" % [
+  vh = "%s/%s" % [
       vhosts_dir,
-      node['project_fqdn'],
-      suffix
+      params[:fqdn]
   ]
 
   directory vhosts_dir do
@@ -23,7 +19,7 @@ define :make_vhosts, :params => {} do
         :servername         => node['git_project'],
         :listen_port        => node['deployment']['nginx_port'],
         :port               => node['deployment']['port'],
-        :project_fqdn       => node['project_fqdn'],
+        :fqdn               => params[:fqdn],
         :catch_and_redirect => node['catch_and_redirect'],
         :default            => node['deployment']['default_vhost'],
         :static_assets      => node['deployment']['static_assets'],
@@ -32,18 +28,6 @@ define :make_vhosts, :params => {} do
     action :create
   end
 
-#  Dir["#{vhosts_dir}/*"].each do |vh|
-#    puts '================================='
-#    puts vh
-#    puts '================================='
-
-#    f = File.open "/tmp/derp", "w"
-#    f.write vh
-#    f.write "\n"
-#    f.write File.basename vh
-#    f.write "\n"
-#    f.close
-#
   link "/etc/nginx/sites-enabled/%s" % [
       File.basename(vh)
   ] do

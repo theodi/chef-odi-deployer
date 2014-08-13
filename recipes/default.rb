@@ -62,9 +62,18 @@ end
 
 precompile_assets = node['deployment']['precompile_assets'].nil? ? true : node['deployment']['precompile_assets']
 port              = node['deployment']['port']
+
+fqdn = node['project_fqdn']
+if node['prefix']
+  fqdn = '%s.%s' % [
+    node['prefix'],
+    fqdn
+  ]
+end
+
 root_dir          = "%s/%s" % [
     deploy_root,
-    node['project_fqdn']
+    fqdn
 ]
 
 make_shared_dirs root_dir
@@ -187,6 +196,7 @@ deploy_revision root_dir do
     make_vhosts node['git_project'] do
       cwd current_release_directory
       user running_deploy_user
+      fqdn fqdn
     end
   end
 
@@ -199,12 +209,12 @@ deploy_revision root_dir do
     running_deploy_user       = new_resource.user
     current_release_directory = release_path
 
-    post_deploy_tasks node['post_deploy_tasks'] do
-      cwd current_release_directory
-      user running_deploy_user
-    end
+#    post_deploy_tasks node['post_deploy_tasks'] do
+#      cwd current_release_directory
+#      user running_deploy_user
+#    end
   end
 
-  action :deploy
+  action :force_deploy
 
 end
