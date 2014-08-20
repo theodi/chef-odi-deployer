@@ -209,12 +209,12 @@ deploy_revision root_dir do
     running_deploy_user       = new_resource.user
     current_release_directory = release_path
 
-#    post_deploy_tasks node['post_deploy_tasks'] do
-#      cwd current_release_directory
-#      user running_deploy_user
-#    end
+    post_deploy_tasks node['post_deploy_tasks'] do
+      cwd current_release_directory
+      user running_deploy_user
+    end
   end
 
-  action :force_deploy
+  action :deploy
 
 end
