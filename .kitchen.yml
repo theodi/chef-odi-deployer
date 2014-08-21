@@ -59,11 +59,11 @@ suites:
 
   - name: staging
     run_list:
-    - "recipe[odi-apt]"
+#    - "recipe[odi-apt]"
     - "recipe[odi-users]"
     - "recipe[lib-curl]"
     - "recipe[nodejs]"
-    - "recipe[envbuilder]"
+#    - "recipe[envbuilder]"
     - "recipe[mysql::client]"
     - "recipe[memcached]"
     - "recipe[rackspace-mysql-proxy]"

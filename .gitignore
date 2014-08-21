@@ -2,3 +2,5 @@
 /.bundle/
 /deploy/key.pem
 tmp
+
+test/data_bags/serverdensity/credentials.json
