@@ -9,7 +9,7 @@ describe file("/var/www/staging.certificates.theodi.org/current/public/assets/")
   it { should be_directory }
 end
 
-describe command ('mysql -h localhost -u root -pilikerandompasswords certificates -e "show tables"') do
+describe command ('mysql -h 127.0.0.1 -u root -pilikerandompasswords certificates -e "show tables"') do
   it { should return_stdout /surveys/i }
 end
 

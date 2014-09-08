@@ -1,9 +1,10 @@
 {
-  "host": "localhost",
+  "host": "127.0.0.1",
   "root": {
     "_default": ""
   },
   "certificates": {
-    "production": "how_to_security"
+    "production": "how_to_security",
+    "staging": "it_is_raining"
   }
 }

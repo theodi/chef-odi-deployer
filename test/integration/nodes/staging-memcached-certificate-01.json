@@ -1,0 +1,7 @@
+{
+  "id": "staging-memcached-certificate-01",
+  "chef_environment": "staging",
+  "automatic": {
+    "ipaddress": "127.0.0.1"
+  }
+}

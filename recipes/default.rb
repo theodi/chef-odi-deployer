@@ -65,7 +65,7 @@ precompile_assets = node['deployment']['precompile_assets'].nil? ? true : node['
 port              = node['deployment']['port']
 
 fqdn = node['project_fqdn']
-if node['prefix']
+if node['prefix'] != ''
   fqdn = '%s.%s' % [
     node['prefix'],
     fqdn
@@ -216,6 +216,6 @@ deploy_revision root_dir do
     end
   end
 
-  action :deploy
+  action :force_deploy
 
 end
