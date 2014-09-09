@@ -40,13 +40,13 @@ DEPENDENCIES
     rel: site-cookbooks/odi-xml
   rackspace-mysql-proxy
     git: git://github.com/theodi/rackspace-mysql-proxy.git
-    revision: c19d6538650db114f2f19b1921b159752aa4fa0b
+    revision: 15627081f02292323b16cc59290ce956c9d389bc
   rbenv
     git: git://github.com/fnichol/chef-rbenv.git
     revision: 0a3018634bafe58ad21c6ee271af015220e444b9
   serverdensity
     git: git://github.com/serverdensity/chef-serverdensity.git
-    revision: 2c48b8a9a22755b71dd0743b66abf982f0ed9898
+    revision: 50f6c5efdb92eb32c2986602aea47779f11b7a7e
 
 GRAPH
   7-zip (1.0.2)
@@ -59,12 +59,13 @@ GRAPH
   bluepill (2.3.1)
     rsyslog (>= 0.0.0)
   build-essential (2.0.6)
-  chef-client (3.7.0)
+  chef-client (3.8.0)
     cron (>= 1.2.0)
     logrotate (>= 1.2.0)
+    windows (~> 1.11)
   chef-sugar (2.2.0)
   chef_handler (1.1.6)
-  cron (1.4.0)
+  cron (1.4.2)
   database (2.3.0)
     aws (>= 0.0.0)
     mysql (>= 5.0.0)
@@ -81,14 +82,14 @@ GRAPH
     windows (>= 0.0.0)
     yum (~> 3.0)
     yum-epel (>= 0.0.0)
-  java (1.27.0)
+  java (1.28.0)
   lib-curl (0.1.0)
   logrotate (1.6.0)
   memcached (1.7.2)
     runit (~> 1.0)
     yum (~> 3.0)
     yum-epel (>= 0.0.0)
-  mysql (5.5.1)
+  mysql (5.5.2)
     yum-mysql-community (>= 0.0.0)
   mysql-chef_gem (0.0.2)
     build-essential (>= 0.0.0)
@@ -139,7 +140,7 @@ GRAPH
     apt (>= 1.9.0)
     build-essential (>= 0.0.0)
     openssl (>= 0.0.0)
-  rackspace-mysql-proxy (0.1.1)
+  rackspace-mysql-proxy (0.1.2)
     database (>= 0.0.0)
     mysql (>= 0.0.0)
   rbenv (0.7.3)
