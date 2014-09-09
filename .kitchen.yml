@@ -12,15 +12,19 @@ platforms:
 
 suites:
   - name: default
+    provisioner:
+      client_rb:
+        environment: production
     run_list:
     - "recipe[odi-apt]"
+    - "recipe[odi-base]"
+    - "recipe[mysql::client]"
+    - "recipe[rackspace-mysql-proxy]"
     - "recipe[odi-users]"
     - "recipe[lib-curl]"
     - "recipe[nodejs]"
-    - "recipe[envbuilder]"
-    - "recipe[mysql::client]"
+#    - "recipe[envbuilder]"
     - "recipe[memcached]"
-    - "recipe[rackspace-mysql-proxy]"
     - "recipe[odi-nginx]"
     - "recipe[odi-deployer]"
     data_bags_path: test/data_bags
@@ -40,7 +44,7 @@ suites:
       databags:
         primary: "certificates"
       deployment:
-        revision: "CURRENT"
+        revision: "fix-rakefile"
         precompile_assets: false
         rack_env: production
         assets_allow_origin: "*"

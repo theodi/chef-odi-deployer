@@ -65,7 +65,7 @@ precompile_assets = node['deployment']['precompile_assets'].nil? ? true : node['
 port              = node['deployment']['port']
 
 fqdn = node['project_fqdn']
-if node['prefix'] != ''
+unless [nil, ''].include? node['prefix']
   fqdn = '%s.%s' % [
     node['prefix'],
     fqdn

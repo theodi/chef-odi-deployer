@@ -12,7 +12,7 @@ describe file("/var/www/certificates.theodi.org/current/.env.production") do
 end
 
 describe file("/var/www/certificates.theodi.org/current/database.yml") do
-  its(:content) { should match /host: localhost/ }
+  its(:content) { should match /host: 127.0.0.1/ }
   its(:content) { should match /database: certificates/ }
   its(:content) { should match /username: certificates/ }
   its(:content) { should match /password: how_to_security/ }
