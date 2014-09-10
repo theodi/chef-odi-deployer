@@ -216,6 +216,6 @@ deploy_revision root_dir do
     end
   end
 
-  action :force_deploy
+  action :deploy
 
 end

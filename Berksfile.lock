@@ -13,7 +13,7 @@ DEPENDENCIES
     rel: site-cookbooks/odi-apt
   odi-base
     git: git://github.com/theodi/chef-odi-base.git
-    revision: 3c0a5c3a8b40e5a40bce06513603a3a9e332af35
+    revision: b9b2e8cb2d0ff36143e77b9f7c530d2677745d3b
   odi-deployer
     path: .
     metadata: true
@@ -51,7 +51,7 @@ DEPENDENCIES
 GRAPH
   7-zip (1.0.2)
     windows (>= 1.2.2)
-  apt (2.5.3)
+  apt (2.6.0)
   ark (0.9.0)
     7-zip (>= 0.0.0)
     windows (>= 0.0.0)
@@ -65,7 +65,7 @@ GRAPH
     windows (~> 1.11)
   chef-sugar (2.2.0)
   chef_handler (1.1.6)
-  cron (1.4.2)
+  cron (1.4.3)
   database (2.3.0)
     aws (>= 0.0.0)
     mysql (>= 5.0.0)
@@ -108,14 +108,14 @@ GRAPH
     yum-epel (>= 0.0.0)
   odi-apt (0.1.0)
     apt (>= 0.0.0)
-  odi-base (0.1.3)
+  odi-base (0.1.4)
     chef-client (>= 0.0.0)
     envbuilder (>= 0.0.0)
     git (>= 0.0.0)
     odi-apt (>= 0.0.0)
     odi-monitoring (>= 0.0.0)
     odi-pk (>= 0.0.0)
-  odi-deployer (0.5.6)
+  odi-deployer (0.5.7)
     apt (>= 0.0.0)
     git (>= 0.0.0)
     nginx (>= 0.0.0)
