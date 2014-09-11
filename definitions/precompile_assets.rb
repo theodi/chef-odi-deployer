@@ -7,7 +7,7 @@ define :precompile_assets, :params => {} do
     cwd cwd
     user user
     code <<-EOF
-      bundle exec rake assets:precompile
+      /home/#{user}/.rbenv/shims/bundle exec rake assets:precompile
     EOF
   end
 end

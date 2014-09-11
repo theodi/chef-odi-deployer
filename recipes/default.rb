@@ -87,13 +87,15 @@ deploy_revision root_dir do
       "RACK_ENV" => node['deployment']['rack_env'],
       "HOME"     => "/home/%s" % [
           user
-      ]
+      ],
+      "PATH"     => "/home/#{user}/.rbenv/shims:/usr/local/bin:/usr/bin:/bin"
   )
 
   keep_releases 10
   rollback_on_error false
   migrate           node.has_key? :migrate
   migration_command node['migrate']
+#  migration_command = "/home/#{user}/.rbenv/shims/bundle exec rake db:migrate"
 
   revision node['deployment']['revision']
 

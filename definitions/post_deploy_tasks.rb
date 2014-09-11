@@ -9,7 +9,7 @@ define :post_deploy_tasks, :params => {} do
       cwd cwd
       user user
       code <<-EOF
-        RAILS_ENV=#{node['deployment']['rack_env']} #{command}
+        RAILS_ENV=#{node['deployment']['rack_env']} /home/#{user}/.rbenv/shims/#{command}
       EOF
     end
   end
