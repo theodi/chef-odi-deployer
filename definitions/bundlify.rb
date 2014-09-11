@@ -10,8 +10,7 @@ define :bundlify, :params => {} do
     code <<-EOF
       /home/#{user}/.rbenv/shims/bundle install \
         --without=development test \
-        --quiet \
-        --path #{depot}
+        --quiet
     EOF
   end
 end
