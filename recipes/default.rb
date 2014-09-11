@@ -32,6 +32,14 @@ class Chef::Recipe
   include ODI::Deployment::Helpers
 end
 
+class Chef::Resource::Script
+  include ODI::Deployment::Helpers
+end
+
+class Chef::Resource::DeployRevision
+  include ODI::Deployment::Helpers
+end
+
 deploy_root = node['deployment']['root']
 domain      = get_domain
 
@@ -88,7 +96,7 @@ deploy_revision root_dir do
       "HOME"     => "/home/%s" % [
           user
       ],
-      "PATH"     => "/home/#{user}/.rbenv/shims:/usr/local/bin:/usr/bin:/bin"
+      "PATH"     => user_path(user)
   )
 
   keep_releases 10
@@ -107,7 +115,6 @@ deploy_revision root_dir do
     current_release_directory = release_path
     running_deploy_user       = new_resource.user
     shared_directory          = new_resource.shared_path
-    bundler_depot             = new_resource.shared_path + '/bundle'
 
     begin
       mysql_password = dbi[node['database']][node.chef_environment]
@@ -157,7 +164,6 @@ deploy_revision root_dir do
 
     bundlify current_release_directory do
       user running_deploy_user
-      depot bundler_depot
     end
 
     precompile_assets "Precompile assets" do

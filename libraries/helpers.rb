@@ -48,6 +48,9 @@ module ODI
         end
       end
 
+      def user_path(user)
+        "/home/#{user}/.rbenv/shims:/usr/local/bin:/usr/bin:/bin"
+      end
 
     end
   end

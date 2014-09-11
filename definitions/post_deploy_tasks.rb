@@ -8,6 +8,7 @@ define :post_deploy_tasks, :params => {} do
       interpreter 'bash'
       cwd cwd
       user user
+      environment "PATH" => user_path(user)
       code <<-EOF
         RAILS_ENV=#{node['deployment']['rack_env']} /home/#{user}/.rbenv/shims/#{command}
       EOF

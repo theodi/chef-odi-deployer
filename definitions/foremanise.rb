@@ -21,9 +21,10 @@ define :foremanise, :params => {} do
     interpreter 'bash'
     cwd cwd
     user user
+    environment "PATH" => user_path(user)
     code <<-EOF
-      echo "PATH=/home/#{user}/.rbenv/shims:/usr/local/bin:/usr/bin:/bin" > #{root_dir}/shared/path_env
-      /home/#{user}/.rbenv/shims/bundle exec foreman export \
+      echo "PATH=#{user_path(user)}" > #{root_dir}/shared/path_env
+      bundle exec foreman export \
         -a #{name} \
         -u #{user} \
         -t config/foreman \

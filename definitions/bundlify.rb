@@ -7,8 +7,9 @@ define :bundlify, :params => {} do
     interpreter 'bash'
     cwd cwd
     user user
+    environment "PATH" => user_path(user)
     code <<-EOF
-      /home/#{user}/.rbenv/shims/bundle install \
+      bundle install \
         --without=development test \
         --quiet
     EOF
