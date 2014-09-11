@@ -115,7 +115,7 @@ GRAPH
     odi-apt (>= 0.0.0)
     odi-monitoring (>= 0.0.0)
     odi-pk (>= 0.0.0)
-  odi-deployer (0.5.7)
+  odi-deployer (0.5.14)
     apt (>= 0.0.0)
     git (>= 0.0.0)
     nginx (>= 0.0.0)
