@@ -9,11 +9,11 @@ DEPENDENCIES
   mysql
   odi-apt
     git: git://github.com/theodi/odi-chef.git
-    revision: bb1f4e7aed83874a0decb07378324085fb83633c
+    revision: 8d51ec42c56ec4f20270627e220c3d0e8ebd6970
     rel: site-cookbooks/odi-apt
   odi-base
     git: git://github.com/theodi/chef-odi-base.git
-    revision: b9b2e8cb2d0ff36143e77b9f7c530d2677745d3b
+    revision: 317fb9dc69c423e3523cb42ca6073f87622258f6
   odi-deployer
     path: .
     metadata: true
@@ -25,18 +25,18 @@ DEPENDENCIES
     revision: 7fc535f6d6b4fb32775ef0d01496072bbfa898f2
   odi-pk
     git: git://github.com/theodi/odi-chef.git
-    revision: bb1f4e7aed83874a0decb07378324085fb83633c
+    revision: 8d51ec42c56ec4f20270627e220c3d0e8ebd6970
     rel: site-cookbooks/odi-pk
   odi-ruby
     git: git://github.com/theodi/chef-odi-ruby.git
     revision: 71fa1bd8bb67be4d12aeb3e1a5a634c1384a5be5
   odi-users
     git: git://github.com/theodi/odi-chef.git
-    revision: bb1f4e7aed83874a0decb07378324085fb83633c
+    revision: 8d51ec42c56ec4f20270627e220c3d0e8ebd6970
     rel: site-cookbooks/odi-users
   odi-xml
     git: git://github.com/theodi/odi-chef.git
-    revision: bb1f4e7aed83874a0decb07378324085fb83633c
+    revision: 8d51ec42c56ec4f20270627e220c3d0e8ebd6970
     rel: site-cookbooks/odi-xml
   rackspace-mysql-proxy
     git: git://github.com/theodi/rackspace-mysql-proxy.git
@@ -46,7 +46,7 @@ DEPENDENCIES
     revision: 0a3018634bafe58ad21c6ee271af015220e444b9
   serverdensity
     git: git://github.com/serverdensity/chef-serverdensity.git
-    revision: 50f6c5efdb92eb32c2986602aea47779f11b7a7e
+    revision: b8f81d58dc1ad05f20b81844bd4fdc45da59dc9f
 
 GRAPH
   7-zip (1.0.2)
@@ -55,25 +55,25 @@ GRAPH
   ark (0.9.0)
     7-zip (>= 0.0.0)
     windows (>= 0.0.0)
-  aws (2.4.0)
+  aws (2.5.0)
   bluepill (2.3.1)
     rsyslog (>= 0.0.0)
-  build-essential (2.0.6)
-  chef-client (3.8.0)
+  build-essential (2.1.3)
+  chef-client (4.0.0)
     cron (>= 1.2.0)
     logrotate (>= 1.2.0)
     windows (~> 1.11)
-  chef-sugar (2.2.0)
+  chef-sugar (2.4.1)
   chef_handler (1.1.6)
-  cron (1.4.3)
+  cron (1.6.1)
   database (2.3.0)
     aws (>= 0.0.0)
     mysql (>= 5.0.0)
     mysql-chef_gem (>= 0.0.0)
     postgresql (>= 1.0.0)
     xfs (>= 0.0.0)
-  dmg (2.2.0)
-  dpkg_autostart (0.1.10)
+  dmg (2.2.2)
+  dpkg_autostart (0.1.12)
   envbuilder (0.2.0)
   git (4.0.2)
     build-essential (>= 0.0.0)
@@ -82,18 +82,18 @@ GRAPH
     windows (>= 0.0.0)
     yum (~> 3.0)
     yum-epel (>= 0.0.0)
-  java (1.28.0)
+  java (1.29.0)
   lib-curl (0.1.0)
-  logrotate (1.6.0)
+  logrotate (1.7.0)
   memcached (1.7.2)
     runit (~> 1.0)
     yum (~> 3.0)
     yum-epel (>= 0.0.0)
-  mysql (5.5.2)
+  mysql (6.0.4)
+    smf (>= 0.0.0)
     yum-mysql-community (>= 0.0.0)
-  mysql-chef_gem (0.0.2)
+  mysql-chef_gem (1.0.0)
     build-essential (>= 0.0.0)
-    mysql (>= 0.0.0)
   nginx (2.7.4)
     apt (~> 2.2)
     bluepill (~> 2.3)
@@ -101,14 +101,14 @@ GRAPH
     ohai (~> 2.0)
     runit (~> 1.2)
     yum-epel (~> 0.3)
-  nodejs (2.1.0)
+  nodejs (2.2.0)
     apt (>= 0.0.0)
     ark (>= 0.0.0)
     build-essential (>= 0.0.0)
     yum-epel (>= 0.0.0)
   odi-apt (0.1.0)
     apt (>= 0.0.0)
-  odi-base (0.1.4)
+  odi-base (0.1.5)
     chef-client (>= 0.0.0)
     envbuilder (>= 0.0.0)
     git (>= 0.0.0)
@@ -136,34 +136,38 @@ GRAPH
   ohai (2.0.1)
   openssl (2.0.0)
     chef-sugar (>= 0.0.0)
-  postgresql (3.4.2)
+  postgresql (3.4.14)
     apt (>= 1.9.0)
     build-essential (>= 0.0.0)
     openssl (>= 0.0.0)
   rackspace-mysql-proxy (0.1.2)
     database (>= 0.0.0)
     mysql (>= 0.0.0)
+  rbac (1.0.2)
   rbenv (0.7.3)
     java (> 1.4.0)
     ruby_build (>= 0.0.0)
-  rsyslog (1.12.2)
+  rsyslog (1.13.0)
   ruby_build (0.8.0)
-  runit (1.5.10)
+  runit (1.5.12)
     build-essential (>= 0.0.0)
     yum (~> 3.0)
     yum-epel (>= 0.0.0)
-  serverdensity (2.0.0)
-    apt (>= 0.0.0)
+  serverdensity (2.1.0)
+    apt (~> 2.6)
     dpkg_autostart (~> 0.1.6)
-    yum (>= 0.0.0)
-  windows (1.34.2)
+    yum (~> 3.3)
+  smf (2.2.1)
+    rbac (>= 1.0.1)
+    resource-control (>= 0.0.0)
+  windows (1.36.1)
     chef_handler (>= 0.0.0)
   xfs (1.1.0)
-  xml (1.2.6)
+  xml (1.2.9)
     build-essential (>= 0.0.0)
     chef-sugar (>= 0.0.0)
-  yum (3.3.1)
-  yum-epel (0.5.1)
+  yum (3.5.1)
+  yum-epel (0.5.3)
     yum (~> 3.0)
-  yum-mysql-community (0.1.10)
+  yum-mysql-community (0.1.11)
     yum (>= 3.0)
