@@ -46,7 +46,7 @@ DEPENDENCIES
     revision: 0a3018634bafe58ad21c6ee271af015220e444b9
   serverdensity
     git: git://github.com/serverdensity/chef-serverdensity.git
-    revision: 50f6c5efdb92eb32c2986602aea47779f11b7a7e
+    revision: b8f81d58dc1ad05f20b81844bd4fdc45da59dc9f
 
 GRAPH
   7-zip (1.0.2)
@@ -73,7 +73,7 @@ GRAPH
     postgresql (>= 1.0.0)
     xfs (>= 0.0.0)
   dmg (2.2.0)
-  dpkg_autostart (0.1.10)
+  dpkg_autostart (0.1.12)
   envbuilder (0.2.0)
   git (4.0.2)
     build-essential (>= 0.0.0)
@@ -152,10 +152,10 @@ GRAPH
     build-essential (>= 0.0.0)
     yum (~> 3.0)
     yum-epel (>= 0.0.0)
-  serverdensity (2.0.0)
-    apt (>= 0.0.0)
+  serverdensity (2.1.0)
+    apt (~> 2.6)
     dpkg_autostart (~> 0.1.6)
-    yum (>= 0.0.0)
+    yum (~> 3.3)
   windows (1.34.2)
     chef_handler (>= 0.0.0)
   xfs (1.1.0)
