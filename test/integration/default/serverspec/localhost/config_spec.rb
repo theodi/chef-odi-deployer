@@ -19,7 +19,7 @@ describe file("/var/www/certificates.theodi.org/current/database.yml") do
 end
 
 describe file("/etc/init/open-data-certificate-thin-1.conf") do
-  its(:content) { should match /SUCH=test/ }
+  its(:content) { should match /SUCH='test'/ }
   its(:content) { should match /PORT=3000/ }
   its(:content) { should match /bundle exec thin start/ }
 end
