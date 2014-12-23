@@ -44,7 +44,7 @@ suites:
       databags:
         primary: "certificates"
       deployment:
-        revision: "CURRENT"
+        revision: "new-foreman"
         precompile_assets: false
         rack_env: production
         assets_allow_origin: "*"
@@ -92,7 +92,7 @@ suites:
       databags:
         primary: "certificates"
       deployment:
-        revision: "STAGING"
+        revision: "new-foreman"
         precompile_assets: false
         rack_env: production
         assets_allow_origin: "*"
