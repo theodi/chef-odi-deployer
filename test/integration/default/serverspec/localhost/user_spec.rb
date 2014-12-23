@@ -15,5 +15,5 @@ describe file("/etc/sudoers") do
 end
 
 describe command("su - certificates -c 'ruby -v'") do
-  it { should return_stdout /1.9.3/ }
+  its(:stdout) { should match /1.9.3/ }
 end

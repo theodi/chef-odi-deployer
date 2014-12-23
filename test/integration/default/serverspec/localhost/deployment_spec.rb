@@ -10,13 +10,13 @@ describe file("/var/www/certificates.theodi.org/current/public/assets/") do
 end
 
 describe command ('mysql -h 127.0.0.1 -u root -pilikerandompasswords certificates -e "show tables"') do
-  it { should return_stdout /surveys/i }
+  its(:stdout) { should match /surveys/i }
 end
 
 # Check we can actually access the thing - we'll get a Rails error due
 # to lack of database, but that's OK as we know Rails is running.
 describe command("curl -H 'Host: certificates.theodi.org' localhost") do
-  it { should return_stdout /ODI Open Data Certificate/ }
+  its(:stdout) { should match /ODI Open Data Certificate/ }
 end
 
 describe file('/var/www/certificates.theodi.org/shared/log/production.log') do
