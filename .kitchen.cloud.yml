@@ -46,7 +46,7 @@ suites:
       databags:
         primary: "certificates"
       deployment:
-        revision: "testicicle"
+        revision: "new-foreman"
         precompile_assets: false
         rack_env: production
         assets_allow_origin: "*"
@@ -59,6 +59,6 @@ suites:
         database: certificates
         user: certificates
         password: how_to_security
-      migrate: bundle exec rake db:migrate
+      migrate: bundle exec rake db:schema:load
       post_deploy_tasks:
       - bundle exec rake odc:deploy
