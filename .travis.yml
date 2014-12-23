@@ -8,12 +8,12 @@ before_script:
 - echo 'Host *' >> ~/.ssh/config
 - echo "   StrictHostKeyChecking no" >> ~/.ssh/config
 - openssl aes-256-cbc -k "$DATA_BAG_KEY" -in test/data_bags/serverdensity/credentials.enc.json -d -a -out test/data_bags/serverdensity/credentials.json
-after_success:
-- openssl enc -d -aes-256-cbc -k $CHEF_KEY -in deploy/key.enc -out deploy/key.pem
-- chmod 600 deploy/key.pem
-- bundle exec berks install
-- '[ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] && bundle
-  exec rake berkshelf:upload'
+#after_success:
+#- openssl enc -d -aes-256-cbc -k $CHEF_KEY -in deploy/key.enc -out deploy/key.pem
+#- chmod 600 deploy/key.pem
+#- bundle exec berks install
+#- '[ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] && bundle
+#  exec rake berkshelf:upload'
 env:
   global:
   - KITCHEN_YAML=.kitchen.cloud.yml
