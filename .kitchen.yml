@@ -44,7 +44,7 @@ suites:
       databags:
         primary: "certificates"
       deployment:
-        revision: "fix-rakefile"
+        revision: "STAGING"
         precompile_assets: false
         rack_env: production
         assets_allow_origin: "*"
