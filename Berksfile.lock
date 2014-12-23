@@ -42,8 +42,8 @@ DEPENDENCIES
     git: git://github.com/theodi/rackspace-mysql-proxy.git
     revision: 15627081f02292323b16cc59290ce956c9d389bc
   rbenv
-    git: git://github.com/fnichol/chef-rbenv.git
-    revision: 0a3018634bafe58ad21c6ee271af015220e444b9
+    git: git://github.com/theodi/chef-rbenv.git
+    revision: 8931ff9b07d19613f6dea1a13e33e5416b46b001
   serverdensity
     git: git://github.com/serverdensity/chef-serverdensity.git
     revision: b8f81d58dc1ad05f20b81844bd4fdc45da59dc9f
@@ -82,7 +82,7 @@ GRAPH
     windows (>= 0.0.0)
     yum (~> 3.0)
     yum-epel (>= 0.0.0)
-  java (1.28.0)
+  java (1.29.0)
   lib-curl (0.1.0)
   logrotate (1.6.0)
   memcached (1.7.2)

@@ -9,7 +9,7 @@ cookbook 'odi-nginx', github: 'theodi/chef-odi-nginx'
 cookbook 'lib-curl', github: 'theodi/chef-libcurl'
 cookbook 'odi-ruby', github: 'theodi/chef-odi-ruby'
 cookbook 'rackspace-mysql-proxy', github: 'theodi/rackspace-mysql-proxy'
-cookbook 'rbenv', github: 'fnichol/chef-rbenv'
+cookbook 'rbenv', github: 'theodi/chef-rbenv'
 
 # for test-kitchen
 cookbook 'mysql'
